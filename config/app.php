@@ -199,7 +199,10 @@ return [
 
         // repositories
         App\Repositories\Settings\Company\CompanyRepoServiceProvider::class,
-
+        App\Repositories\Accounts\FinancialYear\FinancialYearRepoServiceProvider::class,
+        App\Repositories\Accounts\ChartOfAccount\ChartOfAccountRepoServiceProvider::class,
+        App\Repositories\Accounts\Transaction\AccTransaction\AccTransactionRepoServiceProvider::class,
+        App\Repositories\Accounts\Transaction\AccTransactionDetails\AccTransactionDetailsRepoServiceProvider::class,
     ],
 
     /*

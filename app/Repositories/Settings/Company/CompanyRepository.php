@@ -16,6 +16,11 @@ class CompanyRepository implements CompanyInterface
         $this->pagelimit = Config::get('app.PAGELIMIT');
     }
 
+    public function all()
+    {
+        return $this->company->get();
+    }
+
     public function allCompany()
     {
         return $this->company->paginate($this->pagelimit);
@@ -35,5 +40,5 @@ class CompanyRepository implements CompanyInterface
         return $this->company->latest()->first();
     }
 
-   
+    
 }

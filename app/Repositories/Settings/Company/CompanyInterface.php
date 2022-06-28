@@ -11,6 +11,8 @@ interface CompanyInterface {
 
     public function latestOne();
 
+    public function all();  
+    
     // public function delete($id);
 
     // public function update($id,$data);

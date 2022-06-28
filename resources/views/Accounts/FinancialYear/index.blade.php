@@ -7,16 +7,16 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        All Company
+                        Fiscal Year List
                     </h2>
                 </div>
                 <div class="col-12 col-md-auto ms-auto d-print-none">
                 <div class="btn-list">
                
-                  <a href="{{ route('settings.company.add') }}" class="btn btn-primary d-none d-sm-inline-block">
+                  <a href="{{ route('accounts.fiscal.year.add') }}" class="btn btn-primary d-none d-sm-inline-block">
                     <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                    Add New Company
+                    Add New Fiscal Year
                   </a>
                
                 </div>
@@ -31,7 +31,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">All Company</h3>
+                <h3 class="card-title">All Fiscal Year</h3>
               </div>
               <div class="card-body border-bottom py-3">
                 <div class="d-flex">
@@ -55,29 +55,30 @@
                   <thead>
                     <tr>
                       <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all invoices"></th>
-                      <th>Name</th>
-                      <th>Description</th>
-                      <th>Address</th>
-                      <th>Lavel</th>
+                      <th>From Date</th>
+                      <th>To Date</th>
+                      <th>Company</th>
+                      <th>Status</th>
                       <th>Options</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @foreach($financialYears as $key =>  $row)
                     <tr>
-                      @foreach($companies as $key =>  $row)
+                      
                       <td><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select invoice"></td>
-                      <td><span class="">{{ $row->name }}</span></td>
-                      <td>{{ $row->description }}</td>
+                      <td><span class="text-muted">{{ $row->fromDate }}</span></td>
+                      <td>{{ $row->toDate }}</td>
                       <td>
-                        {{ $row->address }}
+                        {{ $row->company->name }}
                       </td>
-                      <td>{{ $row->lavel }}</td>
+                      <td>{{ $row->status == 1 ? 'Active' : 'Deactive' }}</td>
                       <td class="text-end">
                         
                           <a href="#" class="btn btn-red">
                             Red
                           </a>
-                        <a title="edit" href="#" class="btn btn-flickr btn-icon" aria-label="Flickr">
+                          <a title="edit" href="#" class="btn btn-flickr btn-icon" aria-label="Flickr">
                           <!-- Download SVG icon from http://tabler-icons.io/i/brand-flickr -->
                           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
                         </a>
