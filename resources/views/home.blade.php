@@ -16,7 +16,12 @@
     <script src="{{asset('public/dist/js/chosen.jquery.min.js')}}"></script>
     <script src="https://unpkg.com/vue"></script>
     <script src="{{asset('public/dist/custom/Global.js')}}"></script>
+    <script src="{{asset('public/dist/custom/custom.js')}}"></script>
 
+    <!-- date picker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    
 
   </head>
   <body  class=" layout-fluid">
