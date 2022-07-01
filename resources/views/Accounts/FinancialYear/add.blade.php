@@ -33,7 +33,7 @@
                            
                             <div class="mb-3">
                               <label class="form-label">From Date</label>
-                              <input type="date" value="{{ old('fromDate') }}" class="date form-control @error('fromDate') is-invalid @enderror" value="{{ old('name') }}" name="fromDate" placeholder="Input company name">
+                              <input type="text" value="{{ old('fromDate') }}" class="date form-control @error('fromDate') is-invalid @enderror" value="{{ old('name') }}" name="fromDate" placeholder="From date" readonly>
                                 @error('fromDate')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="mb-3">
                               <label class="form-label">To Date</label>
-                              <input type="date" value="{{ old('toDate') }}" class="form-control @error('toDate') is-invalid @enderror" name="toDate" placeholder="Input placeholder">
+                              <input type="text" value="{{ old('toDate') }}" class="date form-control @error('toDate') is-invalid @enderror" name="toDate" placeholder="To date" readonly>
                               @error('toDate')
                                   <span class="invalid-feedback" role="alert">
                                       <strong>{{ $message }}</strong>

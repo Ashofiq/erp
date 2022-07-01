@@ -4,9 +4,17 @@ namespace App\Repositories\Accounts\Transaction\AccTransaction;
 
 
 interface AccTransactionInterface {
-    public function create($data);
+    public function get($transType);
+
+    public function create($request);
+
+    public function update($id, $request);
+
+    public function getById($id);
 
     public function getType($typeNo);
+
+    public function getTypeNo($transType);
 
     public function getTitle($typeNo);
 

@@ -24,7 +24,8 @@ Route::group([
     Route::get('index', [ChartOfAccountController::class, 'index'])->name('accounts.chart.of.acc.index');
     Route::get('add', [ChartOfAccountController::class, 'add'])->name('accounts.chart.of.acc.add');
     Route::Post('add', [ChartOfAccountController::class, 'save'])->name('accounts.chart.of.acc.save');
-
+    Route::Post('update', [ChartOfAccountController::class, 'update'])->name('accounts.chart.of.acc.update');
+    Route::Post('delete', [ChartOfAccountController::class, 'delete'])->name('accounts.chart.of.acc.delete');
 });
 
 // transaction
@@ -35,6 +36,9 @@ Route::group([
 ], function () {
     Route::get('create/{id}', [TransactionController::class, 'journalCreate'])->name('accounts.acctrans.jv.create');
     Route::get('acchead/{transTypeNo}/{companyId}', [TransactionController::class, 'acchead'])->name('accounts.acchead');
-    Route::Post('add', [TransactionController::class, 'save'])->name('accounts.chart.of.acc.save');
+    Route::Post('create', [TransactionController::class, 'accTransCreate'])->name('accounts.acc.trans.create');
+    Route::Get('edit/{id}', [TransactionController::class, 'voucherEdit'])->name('accounts.acc.trans.edit');
+    Route::Post('update/{id}', [TransactionController::class, 'voucherUpdate'])->name('accounts.acc.trans.update');
+    Route::Get('list/{transTypeNo}', [TransactionController::class, 'index'])->name('accounts.acc.trans.index');
 
 });

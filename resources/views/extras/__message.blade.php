@@ -8,11 +8,20 @@
         //     timer: 1500
         // })
 
-        $('#myModal').modal('show');
     </script>
     <div class="alert alert-{{ Session::get('message')['class'] }} text-center" role="alert">
         {{ Session::get('message')['message']; }}
     </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif  
 
 
 @endif

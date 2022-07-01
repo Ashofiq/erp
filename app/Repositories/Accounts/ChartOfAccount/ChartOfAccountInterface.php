@@ -7,6 +7,10 @@ interface ChartOfAccountInterface {
 
     public function saveChartOfAccount($data);
 
+    public function updateChartOfAccount($data);
+
+    public function deleteChartOfAccount($id);
+
     public function getByParentId($parentId);
 
     public function getById($parentId);

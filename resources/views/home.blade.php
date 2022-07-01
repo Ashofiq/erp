@@ -15,8 +15,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{asset('public/dist/js/chosen.jquery.min.js')}}"></script>
     <script src="https://unpkg.com/vue"></script>
-    <script src="{{asset('public/dist/custom/Global.js')}}"></script>
-    <script src="{{asset('public/dist/custom/custom.js')}}"></script>
+
+    <!-- sweet alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- date picker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
@@ -370,6 +371,38 @@
                       Journal Voucher
                     </a>
 
+                    <a class="dropdown-item" href="{{ route('accounts.acctrans.jv.create', 2) }}" >
+                      Contra Voucher
+                    </a>
+
+                    <div class="dropend">
+                      <a class="dropdown-item dropdown-toggle show" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true">
+                        Receive
+                      </a>
+                      <div class="dropdown-menu show" data-bs-popper="static">
+                        <a  href="{{ route('accounts.acctrans.jv.create', 3) }}" class="dropdown-item">
+                          Cash Receive
+                        </a>
+                        <a  href="{{ route('accounts.acctrans.jv.create', 4) }}" class="dropdown-item">
+                          Bank Receive
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="dropend">
+                      <a class="dropdown-item dropdown-toggle show" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true">
+                        Payment
+                      </a>
+                      <div class="dropdown-menu show" data-bs-popper="static">
+                        <a  href="{{ route('accounts.acctrans.jv.create', 5) }}" class="dropdown-item">
+                          Cash Payment
+                        </a>
+                        <a  href="{{ route('accounts.acctrans.jv.create', 6) }}" class="dropdown-item">
+                          Bank Payment
+                        </a>
+                      </div>
+                    </div>
+
                     <a class="dropdown-item" href="{{ route('accounts.fiscal.year.all') }}" >
                       Financial Year
                     </a>
@@ -527,6 +560,9 @@
     <script src="{{asset('public/dist/js/tabler.min.js')}}"></script>
     <script src="{{asset('public/dist/js/demo.min.js')}}"></script>
     <script src="{{ asset('js/app.js') }}" async defer></script>
+    
+    <script src="{{asset('public/dist/custom/Global.js')}}"></script>
+    <script src="{{asset('public/dist/custom/custom.js')}}"></script>
     <script type="text/javascript">
         $('.chosen-select').chosen();
     </script>

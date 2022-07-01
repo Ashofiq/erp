@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('acc_transaction_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('accTransId');
-            $table->decimal('Damount', 20,2);
-            $table->decimal('Camount', 20,2);
+            $table->integer('accTransId')->index('accTransId');
+            $table->decimal('dAmount', 20,2)->nullable();
+            $table->decimal('cAmount', 20,2)->nullable();
             $table->integer('chartOfAccId')->index('chartOfAccId');
-            $table->bigInteger('accInvoiceNo');
-            $table->integer('createdBy');
-            $table->integer('updatedBy');
+            $table->text('description')->nullable();
+            $table->bigInteger('accInvoiceNo')->nullable();
             $table->timestamps();
         });
     }

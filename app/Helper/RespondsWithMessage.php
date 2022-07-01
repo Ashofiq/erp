@@ -36,8 +36,13 @@ trait RespondsWithMessage
         return 'Successfully added';
     }
 
+    public function SUCCESSUPDATEMESSAGE() : String
+    {
+        return 'Successfully Update';
+    }
+
     public function FAILMESSAGE() : String
     {
-        return 'Successfully added';
+        return 'Something Wrong';
     }
 } 

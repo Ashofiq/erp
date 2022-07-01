@@ -5,6 +5,7 @@ namespace App\Repositories\Accounts\FinancialYear;
 use App\Repositories\Accounts\FinancialYear\FinancialYearInterface as FinancialYearInterface;
 use App\Models\Accounts\FinancialYear\FinancialYear;
 use Config;
+use Helper;
 
 class FinancialYearRepository implements FinancialYearInterface
 {
@@ -28,9 +29,9 @@ class FinancialYearRepository implements FinancialYearInterface
 
     public function saveFinancialYear($data)
     {
-        $this->fiscalYear->fromDate = $data->fromDate;
-        $this->fiscalYear->toDate = $data->toDate;
-        $this->fiscalYear->companyId = $data->companyId;
+        $this->fiscalYear->fromDate =Helper::dateBnToEn($data->fromDate);
+        $this->fiscalYear->toDate = Helper::dateBnToEn($data->toDate);
+        $this->fiscalYear->companyId =  $data->companyId;
         $this->fiscalYear->status = $data->status;
         $this->fiscalYear->serial = $data->serial;
         return $this->fiscalYear->save();

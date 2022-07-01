@@ -18,7 +18,7 @@ class ChartOfAccountRepository implements ChartOfAccountInterface
 
     public function getByParentId($parentId)
     {
-        return $this->chartOfAcc->where('parentId', $parentId)->paginate($this->pagelimit);
+        return $this->chartOfAcc->with('company')->where('parentId', $parentId)->paginate($this->pagelimit);
     }
 
     public function getById($parentId)
@@ -37,6 +37,25 @@ class ChartOfAccountRepository implements ChartOfAccountInterface
         return $this->chartOfAcc->save();
     }
 
+    public function updateChartOfAccount($data){
+        $chartofacc = self::getById($data->id);
+
+        $chartAcc = $this->chartOfAcc->find($data->id);
+        $chartAcc->companyId = $data->companyId;
+        $chartAcc->accHead = $data->accHead;
+        $chartAcc->accOrigin = self::genOrigin($chartofacc->parentId, $data->accHead);
+        return $chartAcc->save();
+    }
+
+    public function deleteChartOfAccount($id)
+    {
+        if ($this->chartOfAcc->find($id)->delete()) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function genAccCode()
     {
         return $this->chartOfAcc->latest()->first()?->accCode + 1;
@@ -50,13 +69,11 @@ class ChartOfAccountRepository implements ChartOfAccountInterface
     public function genOrigin($parentId, $accHead)
     {
         $acc = $this->chartOfAcc->where('id', $parentId)->first();
-
         $origin = '';
         if ($acc != null) {
-            $origin .= $acc->accOrigin;
+            $origin = $acc->accOrigin;
         }
-
-        return $accHead. ' >>';
+        return $origin. ' '. $accHead.' >>';
     }
 
 }
