@@ -10,6 +10,8 @@ interface AccTransactionInterface {
 
     public function update($id, $request);
 
+    public function delete($request);
+
     public function getById($id);
 
     public function getType($typeNo);

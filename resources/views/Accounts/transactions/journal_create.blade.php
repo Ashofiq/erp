@@ -169,11 +169,11 @@
         setAccHead(1)
       })
 
-      $(function () {
-        $('.numeric').keyup(function () {     
-            this.value = this.value.replace(/[^1-9\.]/g,'');
-        });
-      });
+      // $(function () {
+      //   $('.numeric').keyup(function () {     
+      //       this.value = this.value.replace(/[^1-9\.]/g,'');
+      //   });
+      // });
 
       
       function setAccHead(i){

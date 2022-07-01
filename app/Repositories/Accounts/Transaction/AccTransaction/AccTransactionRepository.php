@@ -56,6 +56,10 @@ class AccTransactionRepository implements AccTransactionInterface
         return false;
     }
 
+    public function delete($request){
+        
+    }
+
     public function getById($id){
         return $this->accTransaction->with('details')->find($id);
     }
