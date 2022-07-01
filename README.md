@@ -16,9 +16,6 @@ The following is a list of the essential ERP features :
 - Supply Chain Management
 - Sales and Marketing
 
-
-## Laravel Sponsors
-
 ## Issues
 If you come across any issues please report them https://github.com/Ashofiq/erp/issues.
 
