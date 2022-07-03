@@ -23,9 +23,11 @@ class AccTransactionRepository implements AccTransactionInterface
     }
 
     public function get($transType){
-        return $this->accTransaction
+        return $this->accTransaction->with('details')
         ->join('acc_transaction_details', 'acc_transaction_details.accTransId', '=', 'acc_transactions.id')
-        ->TransFilter($transType)->select('acc_transaction_details.*', 'acc_transactions.*', 'acc_transactions.id as id')->paginate(2);
+        ->TransFilter($transType)->select('acc_transaction_details.*', 'acc_transactions.*', 'acc_transactions.id as id')
+        ->orderBy('date', 'DESC')
+        ->paginate(2);
     }
 
     public function create($request){
@@ -146,5 +148,24 @@ class AccTransactionRepository implements AccTransactionInterface
         where `companyId` = $companyId $ext and `id` not in (select `parentId` from `chart_of_accounts`)
         Order By accHead asc";
         return DB::select($sql);
+    }
+
+    public function transTypes(){
+        return [
+            TransactionType::JOURNAL => TransactionTitle::JOURNAL,
+            TransactionType::CONTRA => TransactionTitle::CONTRA,
+            TransactionType::CASHRECEIVE => TransactionTitle::CASHRECEIVE,
+            TransactionType::CASHPAYMENT => TransactionTitle::CASHPAYMENT,
+            TransactionType::BANKRECEIVE => TransactionTitle::BANKRECEIVE,
+            TransactionType::BANKPAYMENT => TransactionTitle::BANKPAYMENT,
+        ];
+    }
+
+    public function getVoucherList($companyId, $transType, $fromDate, $toDate){
+        return $this->accTransaction->with('details')
+            ->where('companyId', $companyId)
+            ->where('transType', $transType)
+            ->whereBetween('date', [$fromDate, $toDate])
+            ->get();
     }
 }

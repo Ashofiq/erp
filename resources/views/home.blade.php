@@ -20,8 +20,10 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- date picker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <link href="{{asset('public/dist/css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
+    <script src="{{asset('public/dist/js/bootstrap-datepicker.js')}}"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script> -->
     
 
   </head>
@@ -396,6 +398,20 @@
                       <div class="dropdown-menu show" data-bs-popper="static">
                         <a  href="{{ route('accounts.acctrans.jv.create', 5) }}" class="dropdown-item">
                           Cash Payment
+                        </a>
+                        <a  href="{{ route('accounts.acctrans.jv.create', 6) }}" class="dropdown-item">
+                          Bank Payment
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="dropend">
+                      <a class="dropdown-item dropdown-toggle show" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true">
+                        Reports
+                      </a>
+                      <div class="dropdown-menu show" data-bs-popper="static">
+                        <a  href="{{ route('accounts.acctrans.voucher.list') }}" class="dropdown-item">
+                          Vouvher Report
                         </a>
                         <a  href="{{ route('accounts.acctrans.jv.create', 6) }}" class="dropdown-item">
                           Bank Payment

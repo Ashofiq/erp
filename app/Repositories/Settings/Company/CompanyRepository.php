@@ -21,6 +21,10 @@ class CompanyRepository implements CompanyInterface
         return $this->company->get();
     }
 
+    public function userCompany(){
+        return $this->company->get();
+    }
+
     public function allCompany()
     {
         return $this->company->paginate($this->pagelimit);

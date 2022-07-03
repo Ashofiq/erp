@@ -52,6 +52,7 @@
                       <th>ID</th>
                       <th>Voucher Date</th>
                       <th>Voucher No</th>
+                      <th>A/C Head</th>
                       <th>Narration</th>
                       <th>Debit</th>
                       <th>Credit</th>
@@ -65,6 +66,7 @@
                       <td  width="3%">{{ $row->id }}</td>
                       <td><span class="text-muted">{{ Helper::dateEnToBn($row->date) }}</span></td>
                       <td>{{ $row->vourcher_no }}</td>
+                      <td width="10%">{{ $row->details[$key]->accHead }}</td>
                       <td  width="40%"> {{ $row->narration }}</td>
                       <td>{{ $row->dAmount }}</td>
                       <td>{{ $row->cAmount }}</td>

@@ -22,4 +22,8 @@ interface AccTransactionInterface {
 
     public function acchead($transTypeNo, $companyId);
 
+    public function transTypes();
+
+    public function getVoucherList($companyId, $transType, $fromDate, $toDate);
+
 }

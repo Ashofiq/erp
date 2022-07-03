@@ -15,7 +15,7 @@ class Helper {
     }
 
     public static function dateBnToEn($date) 
-    {
+    {   
         return date('Y-m-d', strtotime($date));
     }
 }

@@ -39,7 +39,8 @@ class AccTransaction extends Model
 
     public function details()
     {
-        return $this->hasMany(AccTransactionDetails::class, 'accTransId');
+        return $this->hasMany(AccTransactionDetails::class, 'accTransId')
+        ->join('chart_of_accounts', 'chart_of_accounts.id', '=', 'acc_transaction_details.chartOfAccId');
     }
 
     // scope 

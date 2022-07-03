@@ -7,6 +7,8 @@ interface CompanyInterface {
 
     public function allCompany();
 
+    public function userCompany();
+
     public function saveCompany($data);
 
     public function latestOne();

@@ -2,6 +2,8 @@
 use App\Http\Controllers\Accounts\FinancialYearController;
 use App\Http\Controllers\Accounts\ChartOfAccountController;
 use App\Http\Controllers\Accounts\TransactionController;
+use App\Http\Controllers\Accounts\ReportController;
+
 
 // chart of account
 Route::group([
@@ -40,5 +42,14 @@ Route::group([
     Route::Get('edit/{id}', [TransactionController::class, 'voucherEdit'])->name('accounts.acc.trans.edit');
     Route::Post('update/{id}', [TransactionController::class, 'voucherUpdate'])->name('accounts.acc.trans.update');
     Route::Get('list/{transTypeNo}', [TransactionController::class, 'index'])->name('accounts.acc.trans.index');
+});
 
+// Reports
+Route::group([
+    'prefix' => 'account/report',
+    'middleware' => ['UserGuard'],
+    'namespace' => 'App\Http\Controllers'
+], function () {
+    Route::any('voucher-list', [ReportController::class, 'voucherReport'])->name('accounts.acctrans.voucher.list');
+  
 });
