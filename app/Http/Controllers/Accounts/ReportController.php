@@ -57,7 +57,27 @@ class ReportController extends Controller
         $data['toDate'] = $toDate;
         $data['companyId'] = $companyId;
         $data['transType'] = $transType;
-        // return $data;
         return view('Accounts.reports.vourcherlist', $data);
+    }
+
+    public function dailyCashSheet(Request $request)
+    {   
+        $data['companies'] = $this->company->userCompany();
+        $fromDate = date('Y-m-d');
+        $toDate = date('Y-m-d');
+        $companyId = $request->companyId;
+        $data['bankData'] = [];
+
+        if (isset($request->fromDate)) {
+            $fromDate = Helper::dateBnToEn($request->fromDate);
+            $data['bankData'] = $this->accTransaction->getBankData($request->companyId, $fromDate);
+            $data['cashData'] = $this->accTransaction->getCashData($request->companyId, $fromDate);
+        }
+
+        
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+        $data['companyId'] = $companyId;
+        return view('Accounts.reports.daily_cash_sheet', $data);
     }
 }

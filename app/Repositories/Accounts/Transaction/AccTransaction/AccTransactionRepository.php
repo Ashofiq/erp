@@ -168,4 +168,25 @@ class AccTransactionRepository implements AccTransactionInterface
             ->whereBetween('date', [$fromDate, $toDate])
             ->get();
     }
+
+    public function getBankData($companyId, $fromDate){
+        return $this->accTransaction
+        ->join('acc_transaction_details', 'acc_transaction_details.accTransId', '=', 'acc_transactions.id')
+        ->join('chart_of_accounts', 'chart_of_accounts.id', '=', 'acc_transaction_details.chartOfAccId')
+        ->whereBetween('acc_transactions.date', [$fromDate, $fromDate])
+        ->where('transType', TransactionType::BANKRECEIVE)
+        ->where('dAmount', '<>', null)
+        ->where('acc_transactions.companyId', $companyId)
+        ->get();
+    }
+
+    public function getCashData($companyId, $fromDate){
+        return $this->accTransaction
+        ->join('acc_transaction_details', 'acc_transaction_details.accTransId', '=', 'acc_transactions.id')
+        ->join('chart_of_accounts', 'chart_of_accounts.id', '=', 'acc_transaction_details.chartOfAccId')
+        ->whereBetween('acc_transactions.date', [$fromDate, $fromDate])
+        ->where('transType', TransactionType::CASHRECEIVE)
+        ->where('acc_transactions.companyId', $companyId)
+        ->get();
+    }
 }

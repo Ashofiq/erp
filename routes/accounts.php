@@ -51,5 +51,6 @@ Route::group([
     'namespace' => 'App\Http\Controllers'
 ], function () {
     Route::any('voucher-list', [ReportController::class, 'voucherReport'])->name('accounts.acctrans.voucher.list');
-  
+    Route::any('cash-sheet', [ReportController::class, 'dailyCashSheet'])->name('accounts.acctrans.cash.sheet');
+
 });

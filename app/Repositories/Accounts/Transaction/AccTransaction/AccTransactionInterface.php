@@ -26,4 +26,8 @@ interface AccTransactionInterface {
 
     public function getVoucherList($companyId, $transType, $fromDate, $toDate);
 
+    public function getBankData($companyId, $fromDate);
+
+    public function getCashData($companyId, $fromDate);
+
 }

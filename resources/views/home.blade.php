@@ -413,8 +413,8 @@
                         <a  href="{{ route('accounts.acctrans.voucher.list') }}" class="dropdown-item">
                           Vouvher Report
                         </a>
-                        <a  href="{{ route('accounts.acctrans.jv.create', 6) }}" class="dropdown-item">
-                          Bank Payment
+                        <a  href="{{ route('accounts.acctrans.cash.sheet') }}" class="dropdown-item">
+                          Daily Cash Statement
                         </a>
                       </div>
                     </div>
