@@ -353,6 +353,12 @@
                     <a class="dropdown-item" href="{{ route('settings.company.all') }}" >
                       Company
                     </a>
+                    <a class="dropdown-item" href="{{ route('settings.user.all') }}" >
+                      User Information
+                    </a>
+                    <a class="dropdown-item" href="{{ route('settings.company.assign.all') }}" >
+                      Company Assign
+                    </a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -415,6 +421,10 @@
                         </a>
                         <a  href="{{ route('accounts.acctrans.cash.sheet') }}" class="dropdown-item">
                           Daily Cash Statement
+                        </a>
+
+                        <a  href="{{ route('accounts.acctrans.subsidary.ledger') }}" class="dropdown-item">
+                          Subsidary Ledger
                         </a>
                       </div>
                     </div>

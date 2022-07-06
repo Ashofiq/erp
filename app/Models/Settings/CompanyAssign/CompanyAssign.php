@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Models\Accounts\Transaction;
+namespace App\Models\Settings\CompanyAssign;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\App;
-use App\Models\Accounts\Transaction\AccTransactionDetails;
-use Auth;
 use Carbon\Carbon;
+use Auth;
+use Illuminate\Support\Facades\App;
 
-class AccTransaction extends Model
+class CompanyAssign extends Model
 {
     use HasFactory;
-
     protected $fillable = ['updatedBy', 'createdBy'];
 
     public static function boot()
@@ -35,22 +33,5 @@ class AccTransaction extends Model
                 ]);
             });
         }
-    }
-
-    public function details()
-    {
-        return $this->hasMany(AccTransactionDetails::class, 'accTransId')
-        ->join('chart_of_accounts', 'chart_of_accounts.id', '=', 'acc_transaction_details.chartOfAccId');
-    }
-
-    // scope 
-    public function scopeTransFilter($query, $transType)
-    {
-        return $query->where('transType', $transType);
-    }
-
-    // accessor
-    public function getVourcherNoAttribute(){
-        return $this->transType . "-" . $this->voucherNo;
     }
 }

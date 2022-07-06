@@ -58,4 +58,6 @@ class AccTransactionDetailsRepository implements AccTransactionDetailsInterface
         }
         return false;
     }
+
+    
 }

@@ -67,17 +67,47 @@ class ReportController extends Controller
         $toDate = date('Y-m-d');
         $companyId = $request->companyId;
         $data['bankData'] = [];
+        $data['cashData'] = [];
 
         if (isset($request->fromDate)) {
             $fromDate = Helper::dateBnToEn($request->fromDate);
             $data['bankData'] = $this->accTransaction->getBankData($request->companyId, $fromDate);
             $data['cashData'] = $this->accTransaction->getCashData($request->companyId, $fromDate);
         }
-
         
         $data['fromDate'] = $fromDate;
         $data['toDate'] = $toDate;
         $data['companyId'] = $companyId;
         return view('Accounts.reports.daily_cash_sheet', $data);
+    }
+
+
+    public function subsidaryLedger(Request $request)
+    {   
+        $data['companies'] = $this->company->userCompany();
+        $defaultCompanyId = $this->company->getUserDefaultCompanyId();
+        $companyId = $request->companyId;
+        $data['accHeads'] = $this->accTransaction->acchead($transTypeNo = 1, $defaultCompanyId);
+        $fromDate = date('Y-m-d');
+        $toDate = date('Y-m-d');
+        $data['vouchers'] = [];
+        $data['opening'] = $this->accTransaction->getOpeningValueWithAccHead($companyId, $fromDate, null);
+        $data['accHeadId'] = '';
+
+        if (isset($request->fromDate)) {
+            $fromDate = Helper::dateBnToEn($request->fromDate);
+            $toDate = Helper::dateBnToEn($request->toDate);
+            $ledgerId = $request->accHeadId;
+            $data['vouchers'] = $this->accTransaction->getSubLedger($companyId, $fromDate, $toDate, $ledgerId);
+            $data['opening'] = $this->accTransaction->getOpeningValueWithAccHead($companyId, $fromDate, $ledgerId);
+            $data['accHeadId'] = $request->accHeadId;
+
+        }
+
+        
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+        $data['companyId'] = $companyId;
+        return view('Accounts.reports.subsidary_ledger', $data);
     }
 }

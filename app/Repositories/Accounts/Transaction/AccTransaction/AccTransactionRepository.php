@@ -8,6 +8,7 @@ use App\Models\Accounts\ChartOfAccount\ChartOfAccount;
 use App\Enum\TransactionList;
 use App\Enum\TransactionType;
 use App\Enum\TransactionTitle;
+use App\Enum\LedgerEnum;
 use Config;
 use DB;
 use Helper;
@@ -189,4 +190,29 @@ class AccTransactionRepository implements AccTransactionInterface
         ->where('acc_transactions.companyId', $companyId)
         ->get();
     }
+
+    public function getOpeningValueWithAccHead($companyId, $fromDate, $ledgerId){
+
+        return $this->accTransaction
+                    ->join('acc_transaction_details', 'acc_transaction_details.accTransId', '=', 'acc_transactions.id')
+                    ->join('chart_of_accounts', 'chart_of_accounts.id', '=', 'acc_transaction_details.chartOfAccId')
+                    ->where('acc_transactions.companyId', $companyId)
+                    ->where('chart_of_accounts.companyId', $companyId)
+                    ->whereDate('date', '<',$fromDate)
+                    ->where('chart_of_accounts.id', $ledgerId)
+                    ->selectRaw('ifnull(sum(dAmount),0) as debit, ifnull(sum(cAmount),0) as credit')
+                    ->first();
+    }
+
+    public function getSubLedger($companyId, $fromDate, $toDate, $ledgerId){
+        return $this->accTransaction
+            ->join('acc_transaction_details', 'acc_transaction_details.accTransId', '=', 'acc_transactions.id')
+            ->join('chart_of_accounts', 'chart_of_accounts.id', '=', 'acc_transaction_details.chartOfAccId')
+            ->where('acc_transactions.companyId', $companyId)
+            ->whereBetween('date', [$fromDate, $toDate])
+            ->where('chart_of_accounts.id', $ledgerId)
+            ->get();
+    }
+
+    
 }

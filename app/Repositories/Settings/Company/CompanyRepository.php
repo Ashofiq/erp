@@ -17,7 +17,7 @@ class CompanyRepository implements CompanyInterface
     }
 
     public function all()
-    {
+    {   
         return $this->company->get();
     }
 
@@ -44,5 +44,7 @@ class CompanyRepository implements CompanyInterface
         return $this->company->latest()->first();
     }
 
-    
+    public function getUserDefaultCompanyId(){
+        return 1;
+    }
 }

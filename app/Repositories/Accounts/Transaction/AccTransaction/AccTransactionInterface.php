@@ -30,4 +30,8 @@ interface AccTransactionInterface {
 
     public function getCashData($companyId, $fromDate);
 
+    public function getOpeningValueWithAccHead($companyId, $fromDate, $ledgerId);
+
+    public function getSubLedger($companyId, $fromDate, $toDate, $ledgerId);
+
 }

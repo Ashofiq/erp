@@ -14,6 +14,8 @@ interface CompanyInterface {
     public function latestOne();
 
     public function all();  
+
+    public function getUserDefaultCompanyId();
     
     // public function delete($id);
 

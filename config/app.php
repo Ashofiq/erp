@@ -203,6 +203,10 @@ return [
         App\Repositories\Accounts\ChartOfAccount\ChartOfAccountRepoServiceProvider::class,
         App\Repositories\Accounts\Transaction\AccTransaction\AccTransactionRepoServiceProvider::class,
         App\Repositories\Accounts\Transaction\AccTransactionDetails\AccTransactionDetailsRepoServiceProvider::class,
+        App\Repositories\Settings\CompanyAssign\CompanyAssignRepoServiceProvider::class,
+        App\Repositories\Settings\User\UserRepoServiceProvider::class,
+
+
     ],
 
     /*
