@@ -205,6 +205,7 @@ return [
         App\Repositories\Accounts\Transaction\AccTransactionDetails\AccTransactionDetailsRepoServiceProvider::class,
         App\Repositories\Settings\CompanyAssign\CompanyAssignRepoServiceProvider::class,
         App\Repositories\Settings\User\UserRepoServiceProvider::class,
+        App\Repositories\Customer\CustomerRepoServiceProvider::class,
 
 
     ],

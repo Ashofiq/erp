@@ -34,4 +34,7 @@ interface AccTransactionInterface {
 
     public function getSubLedger($companyId, $fromDate, $toDate, $ledgerId);
 
+    public function controlWiseLedger($companyId);
+
+    public function getControlSubLedger($companyId, $fromDate, $toDate, $ledgerId);
 }
