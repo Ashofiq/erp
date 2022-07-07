@@ -5,6 +5,7 @@ namespace App\Models\Accounts\ChartOfAccount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Settings\Company\Company;
+use App\Models\Accounts\Transaction\AccTransactionDetails;
 
 class ChartOfAccount extends Model
 {
@@ -18,4 +19,8 @@ class ChartOfAccount extends Model
         return $this->belongsTo(Company::class, 'companyId', 'id');
     }
 
+    public function transactiondetails()
+    {
+        return $this->hasMany(AccTransactionDetails::class, 'chartOfAccId', 'id');
+    }
 }

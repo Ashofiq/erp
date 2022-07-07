@@ -15,11 +15,12 @@ use Helper;
 
 class AccTransactionRepository implements AccTransactionInterface
 {
-    public $accTransaction;
+    public $accTransaction, $chartOfAcc;
     private $pagelimit;
 
-    function __construct(AccTransaction $accTransaction) {
+    function __construct(AccTransaction $accTransaction, ChartOfAccount $chartOfAcc) {
 	    $this->accTransaction = $accTransaction;
+        $this->chartOfAcc = $chartOfAcc;
         $this->pagelimit = Config::get('app.PAGELIMIT');
     }
 
@@ -247,5 +248,17 @@ class AccTransactionRepository implements AccTransactionInterface
         inner join chart_of_accounts p on p.id = c.parentId
         Where t.companyId =  $companyId and c.parentId = ".$ledgerId." AND t.date BETWEEN '". $fromDate ."' and '". $toDate ."'
         GROUP BY c.accHead ) as M GROUP BY accHead");
+    }
+
+    public function getTrialBalance($companyId, $fromDate, $toDate)
+    {
+        return $this->chartOfAcc
+        ->join('acc_transaction_details', 'acc_transaction_details.chartOfAccId', '=', 'chart_of_accounts.id', 'left outer')
+        ->join('acc_transactions', 'acc_transactions.id', '=', 'acc_transaction_details.accTransId', 'left outer')
+        ->selectRaw('accHead, SUM(dAmount) as dAmount, SUM(cAmount) as cAmount')
+        ->whereBetween('acc_transactions.date', [$fromDate, $toDate])
+        ->groupBy('accHead')
+        ->orderBy('accHead', 'ASC')
+        ->get();
     }
 }

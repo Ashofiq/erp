@@ -28,7 +28,7 @@
                                 <div class="col-2">
                                     <div class="form-group">
                                         <select name="accHeadId" class="form-control chosen-select" id="exampleSelect" required> 
-                                            <option selected disabled>Select Acc Head</option>    
+                                            <!-- <option selected disabled>Select Acc Head</option>     -->
                                             @foreach($controlWiseLedger as $acc)
                                                 <option {{ ($accHeadId == $acc->id) ? 'selected' : '' }} value="{{ $acc->id }}">{{ $acc->accHead }}</option>
                                             @endforeach

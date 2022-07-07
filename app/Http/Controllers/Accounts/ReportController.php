@@ -136,4 +136,47 @@ class ReportController extends Controller
         $data['companyId'] = $companyId;
         return view('Accounts.reports.control_wise_ledger', $data);
     }
+
+
+    public function trialBalance(Request $request)
+    {
+        $data['companies'] = $this->company->userCompany();
+        $companyId = $request->companyId;
+        $fromDate = date('Y-m-d');
+        $toDate = date('Y-m-d');
+        $data['vouchers'] = [];
+
+        if (isset($request->fromDate)) {
+            $fromDate = Helper::dateBnToEn($request->fromDate);
+            $toDate = Helper::dateBnToEn($request->toDate);
+            $data['vouchers'] = $this->accTransaction->getTrialBalance($companyId, $fromDate, $toDate);
+            $data['companyId'] = $companyId;
+        }
+
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+        $data['companyId'] = $companyId;
+        return view('Accounts.reports.trial_balance', $data);
+    }
+
+    public function liquidCash(Request $request)
+    {
+        $data['companies'] = $this->company->userCompany();
+        $companyId = $request->companyId;
+        $fromDate = date('Y-m-d');
+        $toDate = date('Y-m-d');
+        $data['vouchers'] = [];
+
+        if (isset($request->fromDate)) {
+            $fromDate = Helper::dateBnToEn($request->fromDate);
+            $toDate = Helper::dateBnToEn($request->toDate);
+            $data['vouchers'] = $this->accTransaction->getLiquidCash($companyId, $fromDate, $toDate);
+            $data['companyId'] = $companyId;
+        }
+
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+        $data['companyId'] = $companyId;
+        return view('Accounts.reports.liquid_cash', $data);
+    }
 }
