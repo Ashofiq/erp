@@ -55,5 +55,7 @@ Route::group([
     Route::any('subsidary-ledger', [ReportController::class, 'subsidaryLedger'])->name('accounts.acctrans.subsidary.ledger');
     Route::any('control-wise-ledger', [ReportController::class, 'controlWiseLedger'])->name('accounts.control.wise.ledger');
     Route::any('trial-balance', [ReportController::class, 'trialBalance'])->name('accounts.trial.balance');
+    Route::any('liquid-cash', [ReportController::class, 'liquidCash'])->name('accounts.liquid.cash');
+    Route::any('contra-bank-to-cash', [ReportController::class, 'conBankToCash'])->name('accounts.contra.bank.to.cash');
 
 });

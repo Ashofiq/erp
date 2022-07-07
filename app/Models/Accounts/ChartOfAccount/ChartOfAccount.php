@@ -13,6 +13,7 @@ class ChartOfAccount extends Model
 
     const CASHATBANKID = 6;
     const CASHINHAND = 5;
+    
 
     public function company()
     {

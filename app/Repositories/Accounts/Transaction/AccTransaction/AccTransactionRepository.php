@@ -261,4 +261,29 @@ class AccTransactionRepository implements AccTransactionInterface
         ->orderBy('accHead', 'ASC')
         ->get();
     }
+
+    public function getLiquidCash($companyId, $fromDate, $toDate){
+        return $this->chartOfAcc
+        ->join('acc_transaction_details', 'acc_transaction_details.chartOfAccId', '=', 'chart_of_accounts.id', 'left outer')
+        ->join('acc_transactions', 'acc_transactions.id', '=', 'acc_transaction_details.accTransId', 'left outer')
+        ->selectRaw('accHead, SUM(dAmount) as dAmount, SUM(cAmount) as cAmount')
+        ->whereBetween('acc_transactions.date', [$fromDate, $toDate])
+        ->whereIn('parentId', [$this->chartOfAcc::CASHATBANKID, $this->chartOfAcc::CASHINHAND])
+        ->groupBy('accHead')
+        ->orderBy('accHead', 'ASC')
+        ->get();
+    }
+
+    public function getBankToCash($companyId, $fromDate, $toDate){
+        return $this->accTransaction
+        ->join("acc_transaction_details", "acc_transactions.id", "=", "accTransId", 'left outer')
+        ->join("chart_of_accounts", "chart_of_accounts.id", "=", "chartOfAccId", 'left outer')
+        ->whereBetween('acc_transactions.date', [$fromDate, $toDate])
+        ->where('acc_transactions.transType', 'CON')
+        ->whereIn('chart_of_accounts.parentId', [$this->chartOfAcc::CASHATBANKID])
+        ->selectRaw('accHead, date, SUM(cAmount) as cAmount, SUM(dAmount) as dAmount')
+        ->groupBy('accHead', 'date')
+        ->orderBy('date', 'ASC')
+        ->get();
+    }
 }
