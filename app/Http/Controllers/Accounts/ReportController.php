@@ -110,4 +110,30 @@ class ReportController extends Controller
         $data['companyId'] = $companyId;
         return view('Accounts.reports.subsidary_ledger', $data);
     }
+
+    public function controlWiseLedger(Request $request)
+    {
+        $data['companies'] = $this->company->userCompany();
+        $companyId = $request->companyId;
+        $data['controlWiseLedger'] = $this->accTransaction->controlWiseLedger(1);
+        $fromDate = date('Y-m-d');
+        $toDate = date('Y-m-d');
+        $data['vouchers'] = [];
+        $data['accHeadId'] = '';
+
+        if (isset($request->fromDate)) {
+            $fromDate = Helper::dateBnToEn($request->fromDate);
+            $toDate = Helper::dateBnToEn($request->toDate);
+            $ledgerId = $request->accHeadId;
+            $data['vouchers'] = $this->accTransaction->getControlSubLedger($companyId, $fromDate, $toDate, $ledgerId);
+            $data['accHeadId'] = $request->accHeadId;
+            
+        }
+
+        
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+        $data['companyId'] = $companyId;
+        return view('Accounts.reports.control_wise_ledger', $data);
+    }
 }

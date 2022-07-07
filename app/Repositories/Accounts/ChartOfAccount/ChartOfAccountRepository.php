@@ -34,17 +34,24 @@ class ChartOfAccountRepository implements ChartOfAccountInterface
         $this->chartOfAcc->parentId = $data->parentId;
         $this->chartOfAcc->accLavel = self::genAccLavel($data->parentId);
         $this->chartOfAcc->accOrigin = self::genOrigin($data->parentId, $data->accHead);
-        return $this->chartOfAcc->save();
+        $chartOfAcc = $this->chartOfAcc->save();
+        if ($chartOfAcc) {
+            return $this->chartOfAcc;
+        }
+        return false;
     }
 
     public function updateChartOfAccount($data){
-        $chartofacc = self::getById($data->id);
+        $chart = self::getById($data->id);
 
         $chartAcc = $this->chartOfAcc->find($data->id);
         $chartAcc->companyId = $data->companyId;
         $chartAcc->accHead = $data->accHead;
-        $chartAcc->accOrigin = self::genOrigin($chartofacc->parentId, $data->accHead);
-        return $chartAcc->save();
+        $chartAcc->accOrigin = self::genOrigin($chart->parentId, $data->accHead);
+        if ($chartAcc->save()) {
+            return $chartAcc;
+        }
+        return false;
     }
 
     public function deleteChartOfAccount($id)

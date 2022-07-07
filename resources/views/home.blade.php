@@ -426,6 +426,10 @@
                         <a  href="{{ route('accounts.acctrans.subsidary.ledger') }}" class="dropdown-item">
                           Subsidary Ledger
                         </a>
+
+                        <a  href="{{ route('accounts.control.wise.ledger') }}" class="dropdown-item">
+                          Control Wise Subsidary Ledger
+                        </a>
                       </div>
                     </div>
 

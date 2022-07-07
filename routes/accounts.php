@@ -53,5 +53,6 @@ Route::group([
     Route::any('voucher-list', [ReportController::class, 'voucherReport'])->name('accounts.acctrans.voucher.list');
     Route::any('cash-sheet', [ReportController::class, 'dailyCashSheet'])->name('accounts.acctrans.cash.sheet');
     Route::any('subsidary-ledger', [ReportController::class, 'subsidaryLedger'])->name('accounts.acctrans.subsidary.ledger');
+    Route::any('control-wise-ledger', [ReportController::class, 'controlWiseLedger'])->name('accounts.control.wise.ledger');
 
 });

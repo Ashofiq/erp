@@ -209,10 +209,43 @@ class AccTransactionRepository implements AccTransactionInterface
             ->join('acc_transaction_details', 'acc_transaction_details.accTransId', '=', 'acc_transactions.id')
             ->join('chart_of_accounts', 'chart_of_accounts.id', '=', 'acc_transaction_details.chartOfAccId')
             ->where('acc_transactions.companyId', $companyId)
-            ->whereBetween('date', [$fromDate, $toDate])
+            ->whereBetween('acc_transactions.date', [$fromDate, $toDate])
             ->where('chart_of_accounts.id', $ledgerId)
             ->get();
     }
 
-    
+    public function controlWiseLedger($companyId)
+    {   
+        return DB::table('chart_of_accounts as c')
+            ->join('chart_of_accounts as p', 'p.id', '=', 'c.parentId')
+            ->where('c.companyId', $companyId)
+            ->select('p.id as id', 'p.accHead as accHead')
+            ->whereNotIn('c.id', function($q){ 
+                $q->select('parentId')->from('chart_of_accounts');
+            })
+            ->distinct()
+            ->get();
+    }
+
+    public function getControlSubLedger($companyId, $fromDate, $toDate, $ledgerId)
+    {
+        return DB::select("SELECT accHead, SUM(op_d_amount) as op_debit, SUM(op_c_amount) as op_credit ,
+        SUM(t_d_amount) as tr_debit,SUM(t_c_amount) as tr_credit
+        FROM
+        (SELECT c.accHead as accHead,SUM(dAmount) as op_d_amount,SUM(cAmount) as op_c_amount, 0 as t_d_amount,0 as t_c_amount
+        FROM acc_transactions t
+        INNER JOIN acc_transaction_details on t.id = accTransId
+        INNER JOIN chart_of_accounts c on c.id = chartOfAccId 
+        inner join chart_of_accounts p on p.id = c.parentId
+        Where t.companyId =  $companyId and c.parentId = ".$ledgerId." AND t.date < '". $fromDate ."'
+        GROUP BY c.accHead
+        UNION ALL
+        SELECT c.accHead as accHead,0 as op_d_amount,0 as op_c_amount,SUM(dAmount) as t_d_amount,SUM(cAmount) as t_c_amount
+        FROM acc_transactions t
+        INNER JOIN acc_transaction_details on t.id = accTransId
+        INNER JOIN chart_of_accounts c on c.id = chartOfAccId
+        inner join chart_of_accounts p on p.id = c.parentId
+        Where t.companyId =  $companyId and c.parentId = ".$ledgerId." AND t.date BETWEEN '". $fromDate ."' and '". $toDate ."'
+        GROUP BY c.accHead ) as M GROUP BY accHead");
+    }
 }

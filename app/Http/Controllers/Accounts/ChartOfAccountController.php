@@ -8,23 +8,26 @@ use App\Helper\RespondsWithMessage;
 use App\Repositories\Settings\Company\CompanyInterface;
 use App\Repositories\Accounts\FinancialYear\FinancialYearInterface;
 use App\Repositories\Accounts\ChartOfAccount\ChartOfAccountInterface;
+use App\Repositories\Customer\CustomerInterface;
 use App\Repositories\Accounts\Transaction\AccTransactionDetails\AccTransactionDetailsInterface;
 
 class ChartOfAccountController extends Controller
 {   
     use RespondsWithMessage;
-    private $financialYear, $company, $chartOfAccount, $accTransactionDetails;
+    private $financialYear, $company, $chartOfAccount, $accTransactionDetails, $customer;
     public function __construct(
                 FinancialYearInterface $financialYear, 
                 CompanyInterface $company,
                 ChartOfAccountInterface $chartOfAccount,
-                AccTransactionDetailsInterface $accTransactionDetails
+                AccTransactionDetailsInterface $accTransactionDetails,
+                CustomerInterface $customer
             ){
 
         $this->financialYear = $financialYear;
         $this->company = $company;
         $this->chartOfAccount = $chartOfAccount;
         $this->accTransactionDetails = $accTransactionDetails;
+        $this->customer = $customer;
     }
 
 
@@ -45,18 +48,17 @@ class ChartOfAccountController extends Controller
 
     public function save(Request $request)
     {   
-
         $validated = $request->validate([
             'accHead' => 'required',
             'companyId' => 'required',
         ]);
 
-        // sundray debtors
-        if ($request->parentId == $this->chartOfAccount::FIXEDASSETID) {
-            # create customer
-
-        }
         $final = $this->chartOfAccount->saveChartOfAccount($request);
+
+        // sundray debtors
+        if ($request->parentId == $this->chartOfAccount::SUNDRYDEBTORSID) {
+            $this->customer->addCustomer($request, $final->id);
+        }
                
         if($final){
             return back()->with('message', 
@@ -79,8 +81,10 @@ class ChartOfAccountController extends Controller
     public function update(Request $request)
     {   
         $final = $this->chartOfAccount->updateChartOfAccount($request);
-
         if($final){
+            // update customer
+            $this->customer->updateCustomer($request, $final->id);
+
             return back()->with('message', 
                 $this->response(
                     $this->SUCCESSCLASS(), 
@@ -98,8 +102,7 @@ class ChartOfAccountController extends Controller
     }
 
     public function delete(Request $request)
-    {
-        // $check = $this->accTransactionDetails->exist($request->id);
+    {   
         if ($this->accTransactionDetails->exist($request->id)) {
             return back()->with('message', 
                 $this->response(
@@ -111,6 +114,9 @@ class ChartOfAccountController extends Controller
         $final = $this->chartOfAccount->deleteChartOfAccount($request->id);
 
         if($final){
+            // delete customer
+            $this->customer->deleteCustomer($request->id);
+            
             return back()->with('message', 
                 $this->response(
                     $this->SUCCESSCLASS(), 
