@@ -12,6 +12,7 @@ use App\Repositories\Accounts\Transaction\AccTransaction\AccTransactionInterface
 use App\Repositories\Accounts\Transaction\AccTransactionDetails\AccTransactionDetailsInterface;
 use App\Enum\TransactionTitle;
 use Helper;
+use PDF;
 
 class ReportController extends Controller
 {   
@@ -49,7 +50,8 @@ class ReportController extends Controller
 
             $data['vouchers'] = $this->accTransaction->getVoucherList($request->companyId, 
             $request->transType, $fromDate, $toDate);
-            
+
+            $data['company'] = $this->company->getById($companyId);
         }
 
         
@@ -57,6 +59,13 @@ class ReportController extends Controller
         $data['toDate'] = $toDate;
         $data['companyId'] = $companyId;
         $data['transType'] = $transType;
+
+        // pdf view
+        if ($request->input('submit') == "pdf"){
+            $pdf = PDF::loadView('Accounts.reports.voucherList_pdf', $data);
+            return $pdf->stream('document.pdf');
+        }
+
         return view('Accounts.reports.vourcherlist', $data);
     }
 

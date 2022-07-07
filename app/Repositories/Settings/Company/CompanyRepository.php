@@ -56,4 +56,8 @@ class CompanyRepository implements CompanyInterface
     public function getUserDefaultCompanyId(){
         return 1;
     }
+
+    public function getById($id){
+        return $this->company->find($id);
+    }
 }
