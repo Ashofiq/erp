@@ -1,4 +1,5 @@
 @extends('home')
+@section('title', $title)
 
 @section('content')
     <div class="container-xl">

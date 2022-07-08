@@ -1,5 +1,5 @@
 @extends('home')
-@section('title', 'Journal Voucher Create')
+@section('title', 'Voucher List | Report')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                         <h1 class="card-title text-center">Voucher Report</h1>
                         
                         @csrf
-                        <div class="row text-end" style="width:100%">
+                        <div class="row " style="width:100%">
                             <div class="col-1">
                             </div>
                             <div class="col-2">

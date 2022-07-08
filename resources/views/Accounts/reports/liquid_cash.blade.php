@@ -1,5 +1,5 @@
 @extends('home')
-@section('title', 'Subsidiary Ledger | report')
+@section('title', 'Liquid Cash | report')
 
 @section('content')
 
@@ -12,7 +12,7 @@
                     <div class="card-header" >
                         <h1 class="card-title text-center">Liquid Cash Report </h1>
                             @csrf
-                            <div class="voucher d-flex" style="width:100%">
+                            <div class="row" style="width:100%">
                                 <div class="col-1">
                                 </div>
                                 <div class="col-2">
