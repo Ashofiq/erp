@@ -430,6 +430,18 @@
                         <a  href="{{ route('accounts.control.wise.ledger') }}" class="dropdown-item">
                           Control Wise Subsidary Ledger
                         </a>
+
+                        <a  href="{{ route('accounts.trial.balance') }}" class="dropdown-item">
+                          Trial Balance
+                        </a>
+
+                        <a  href="{{ route('accounts.liquid.cash') }}" class="dropdown-item">
+                          Liquid Cash
+                        </a>
+
+                        <a  href="{{ route('accounts.contra.bank.to.cash') }}" class="dropdown-item">
+                          Bank To Cash
+                        </a>
                       </div>
                     </div>
 

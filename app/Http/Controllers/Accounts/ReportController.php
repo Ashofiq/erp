@@ -12,6 +12,7 @@ use App\Repositories\Accounts\Transaction\AccTransaction\AccTransactionInterface
 use App\Repositories\Accounts\Transaction\AccTransactionDetails\AccTransactionDetailsInterface;
 use App\Enum\TransactionTitle;
 use Helper;
+use PDF;
 
 class ReportController extends Controller
 {   
@@ -49,7 +50,8 @@ class ReportController extends Controller
 
             $data['vouchers'] = $this->accTransaction->getVoucherList($request->companyId, 
             $request->transType, $fromDate, $toDate);
-            
+
+            $data['company'] = $this->company->getById($companyId);
         }
 
         
@@ -57,6 +59,13 @@ class ReportController extends Controller
         $data['toDate'] = $toDate;
         $data['companyId'] = $companyId;
         $data['transType'] = $transType;
+
+        // pdf view
+        if ($request->input('submit') == "pdf"){
+            $pdf = PDF::loadView('Accounts.reports.voucherList_pdf', $data);
+            return $pdf->stream('document.pdf');
+        }
+
         return view('Accounts.reports.vourcherlist', $data);
     }
 
@@ -135,5 +144,68 @@ class ReportController extends Controller
         $data['toDate'] = $toDate;
         $data['companyId'] = $companyId;
         return view('Accounts.reports.control_wise_ledger', $data);
+    }
+
+
+    public function trialBalance(Request $request)
+    {
+        $data['companies'] = $this->company->userCompany();
+        $companyId = $request->companyId;
+        $fromDate = date('Y-m-d');
+        $toDate = date('Y-m-d');
+        $data['vouchers'] = [];
+
+        if (isset($request->fromDate)) {
+            $fromDate = Helper::dateBnToEn($request->fromDate);
+            $toDate = Helper::dateBnToEn($request->toDate);
+            $data['vouchers'] = $this->accTransaction->getTrialBalance($companyId, $fromDate, $toDate);
+            $data['companyId'] = $companyId;
+        }
+
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+        $data['companyId'] = $companyId;
+        return view('Accounts.reports.trial_balance', $data);
+    }
+
+    public function liquidCash(Request $request)
+    {
+        $data['companies'] = $this->company->userCompany();
+        $companyId = $request->companyId;
+        $fromDate = date('Y-m-d');
+        $toDate = date('Y-m-d');
+        $data['vouchers'] = [];
+
+        if (isset($request->fromDate)) {
+            $fromDate = Helper::dateBnToEn($request->fromDate);
+            $toDate = Helper::dateBnToEn($request->toDate);
+            $data['vouchers'] = $this->accTransaction->getLiquidCash($companyId, $fromDate, $toDate);
+            $data['companyId'] = $companyId;
+        }
+
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+        $data['companyId'] = $companyId;
+        return view('Accounts.reports.liquid_cash', $data);
+    }
+
+    public function conBankToCash (Request $request)
+    {
+        $data['companies'] = $this->company->userCompany();
+        $companyId = $request->companyId;
+        $fromDate = date('Y-m-d');
+        $toDate = date('Y-m-d');
+        $data['vouchers'] = [];
+
+        if (isset($request->fromDate)) {
+            $fromDate = Helper::dateBnToEn($request->fromDate);
+            $toDate = Helper::dateBnToEn($request->toDate);
+            $data['vouchers'] = $this->accTransaction->getBankToCash($companyId, $fromDate, $toDate);
+        }
+
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+        $data['companyId'] = $companyId;
+        return view('Accounts.reports.contra_bank_to_cash', $data);
     }
 }

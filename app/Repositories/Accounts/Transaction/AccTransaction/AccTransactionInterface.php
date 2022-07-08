@@ -37,4 +37,8 @@ interface AccTransactionInterface {
     public function controlWiseLedger($companyId);
 
     public function getControlSubLedger($companyId, $fromDate, $toDate, $ledgerId);
+
+    public function getTrialBalance($companyId, $fromDate, $toDate);
+
+    public function getLiquidCash($companyId, $fromDate, $toDate);
 }

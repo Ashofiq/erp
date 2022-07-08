@@ -1,5 +1,5 @@
 @extends('home')
-@section('title', 'Journal Voucher Create')
+@section('title', $title)
 
 @section('script')
 <script src="{{asset('public/dist/custom/transaction.js')}}"></script>

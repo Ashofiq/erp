@@ -1,5 +1,5 @@
 @extends('home')
-@section('title', 'Journal Voucher Create')
+@section('title', 'Voucher List | Report')
 
 @section('content')
 
@@ -8,14 +8,15 @@
         <div class="row row-cards">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header" >
-                <h1 class="card-title text-center">Voucher Report</h1>
-                    <form method="post" action="{{ route('accounts.acctrans.voucher.list') }}">
+                <form method="post" action="{{ route('accounts.acctrans.voucher.list') }}">
+                    <div class="card-header" >
+                        <h1 class="card-title text-center">Voucher Report</h1>
+                        
                         @csrf
-                        <div class="row text-end" style="width:100%">
+                        <div class="row " style="width:100%">
                             <div class="col-1">
                             </div>
-                            <div class="col-3">
+                            <div class="col-2">
                                 <div class="form-group">
                                     <select name="companyId" class="form-control" id="exampleSelect">
                                         @foreach($companies as $company)
@@ -38,13 +39,16 @@
                             <div class="col-2">
                                 <input name="toDate" type="text" class="form-control date" placeholder="To Date" value="{{ Helper::dateEnToBn($toDate) }}">
                             </div>
-                            <div class="col-1">
-                                <input type="submit" class="btn btn-success " placeholder="Last name" aria-label="Last name">
+                            <div class="col-2">
+                                <input type="submit" class="btn btn-success ">
+                                <input type="submit" class="btn btn-success " value="pdf" name="submit">
+
                             </div>
-                        
+
                         </div>
-                    </form>
-                </div>
+                    
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <table class="table card-table table-vcenter table-bordered">
                         <thead>

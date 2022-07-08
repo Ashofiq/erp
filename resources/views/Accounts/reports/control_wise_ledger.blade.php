@@ -1,5 +1,5 @@
 @extends('home')
-@section('title', 'Subsidiary Ledger | report')
+@section('title', 'Control Wise Subsidiary Ledger | report')
 
 @section('content')
 
@@ -12,7 +12,7 @@
                     <div class="card-header" >
                         <h1 class="card-title text-center">Control Wise Ledger</h1>
                             @csrf
-                            <div class="voucher d-flex" style="width:100%">
+                            <div class="row" style="width:100%">
                                 <div class="col-1">
                                 </div>
                                 <div class="col-2">
@@ -28,7 +28,7 @@
                                 <div class="col-2">
                                     <div class="form-group">
                                         <select name="accHeadId" class="form-control chosen-select" id="exampleSelect" required> 
-                                            <option selected disabled>Select Acc Head</option>    
+                                            <!-- <option selected disabled>Select Acc Head</option>     -->
                                             @foreach($controlWiseLedger as $acc)
                                                 <option {{ ($accHeadId == $acc->id) ? 'selected' : '' }} value="{{ $acc->id }}">{{ $acc->accHead }}</option>
                                             @endforeach
