@@ -3,7 +3,18 @@ use App\Http\Controllers\Accounts\FinancialYearController;
 use App\Http\Controllers\Accounts\ChartOfAccountController;
 use App\Http\Controllers\Accounts\TransactionController;
 use App\Http\Controllers\Accounts\ReportController;
+use App\Http\Controllers\Accounts\DashboardController;
+use App\Http\Controllers\Settings\Company\ConpanyController;
+use App\Http\Controllers\Settings\User\UserController;
+use App\Http\Controllers\Settings\Company\CompanyAssignController;
 
+Route::group([
+    'prefix' => 'account',
+    'middleware' => ['UserGuard'],
+    'namespace' => 'App\Http\Controllers'
+], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('accounts.dashboard');
+});
 
 // chart of account
 Route::group([
@@ -57,5 +68,41 @@ Route::group([
     Route::any('trial-balance', [ReportController::class, 'trialBalance'])->name('accounts.trial.balance');
     Route::any('liquid-cash', [ReportController::class, 'liquidCash'])->name('accounts.liquid.cash');
     Route::any('contra-bank-to-cash', [ReportController::class, 'conBankToCash'])->name('accounts.contra.bank.to.cash');
+
+});
+
+// company
+Route::group([
+    'prefix' => 'account/company',
+    'middleware' => ['UserGuard'],
+    'namespace' => 'App\Http\Controllers'
+], function () {
+    Route::get('add', [ConpanyController::class, 'add'])->name('settings.company.add');
+    Route::Post('add', [ConpanyController::class, 'save'])->name('settings.company.save');
+    Route::get('all', [ConpanyController::class, 'index'])->name('settings.company.all');
+
+});
+
+// User
+Route::group([
+    'prefix' => 'account/user',
+    'middleware' => ['UserGuard'],
+    'namespace' => 'App\Http\Controllers'
+], function () {
+    Route::Post('add', [UserController::class, 'save'])->name('settings.user.save');
+    Route::get('all', [UserController::class, 'index'])->name('settings.user.all');
+    Route::Post('update', [UserController::class, 'update'])->name('settings.user.update');
+});
+
+// company Assign
+Route::group([
+    'prefix' => 'account/company-assign',
+    'middleware' => ['UserGuard'],
+    'namespace' => 'App\Http\Controllers'
+], function () {
+    Route::Post('add', [CompanyAssignController::class, 'save'])->name('settings.company.assign.save');
+    Route::get('all', [CompanyAssignController::class, 'index'])->name('settings.company.assign.all');
+    Route::Post('update', [CompanyAssignController::class, 'update'])->name('settings.company.assign.update');
+    Route::Post('delete', [CompanyAssignController::class, 'delete'])->name('settings.company.assign.delete');
 
 });
