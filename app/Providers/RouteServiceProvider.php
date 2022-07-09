@@ -40,6 +40,11 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 // ->namespace($this->namespace)
                 ->group(base_path('routes/accounts.php'));
+            
+            // Hr And Payroll
+            Route::middleware('web')
+                // ->namespace($this->namespace)
+                ->group(base_path('routes/hrpayroll.php'));
         });
     }
 

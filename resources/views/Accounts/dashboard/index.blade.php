@@ -1,5 +1,5 @@
 @extends('home')
-@section('title', 'Dashboard')
+@section('title', 'Accounts Dashboard')
 
 @section('content')
     <div class="page-body" id="app">

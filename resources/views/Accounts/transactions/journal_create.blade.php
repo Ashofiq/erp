@@ -213,7 +213,7 @@
         html = '<tr>';
         html += '<td width="3%">'+ i +'</td>';
         html += '<td width="30%">';
-        html += '<select name="accHead[]" class="form-select chosen-select" id="accHead_'+ i +'">';
+        html += '<select name="accHead[]" class="form-select chosen-select" id="accHead_'+ i +'" style="width:100%">';
         html += '</select>';
         html += '</td>';
         html += '<td width="20%">';

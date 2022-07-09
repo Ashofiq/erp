@@ -1,0 +1,7 @@
+.chosen-container .chosen-single{
+    height: 35px !important;
+}
+
+.chosen-container .chosen-single span{
+  padding-top: 4px !important;
+}

@@ -12,9 +12,9 @@
     <link href="{{asset('public/dist/css/tabler-vendors.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('public/dist/css/demo.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('public/dist/css/chosen.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('public/dist/css/custom.css')}}" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{asset('public/dist/js/chosen.jquery.min.js')}}"></script>
-    <script src="https://unpkg.com/vue"></script>
 
     <!-- sweet alert -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -183,7 +183,7 @@
             <div class="container-xl">
 
               @include('extras.navbar')
-              
+
               <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
                 <form action="." method="get">
                   <div class="input-icon">
