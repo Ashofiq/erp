@@ -90,7 +90,7 @@ class ReportController extends Controller
         return view('Accounts.reports.daily_cash_sheet', $data);
     }
 
-
+ 
     public function subsidaryLedger(Request $request)
     {   
         $data['companies'] = $this->company->userCompany();

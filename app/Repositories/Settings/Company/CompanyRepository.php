@@ -4,19 +4,20 @@ namespace App\Repositories\Settings\Company;
 
 use App\Repositories\Settings\Company\CompanyInterface as CompanyInterface;
 use App\Models\Settings\Company\Company;
+use App\Models\Settings\CompanyAssign\CompanyAssign;
 use Config;
 use Auth;
 
 class CompanyRepository implements CompanyInterface
 {
-    public $company;
+    public $company, $companyAssign;
     private $pagelimit, $userId;
 
-
-    function __construct(Company $company) {
+    function __construct(Company $company, CompanyAssign $companyAssign) {
 	    $this->company = $company;
         $this->pagelimit = Config::get('app.PAGELIMIT');
         $this->userId = Auth::id();
+        $this->companyAssign = $companyAssign;
     }
 
     public function all()
@@ -54,7 +55,7 @@ class CompanyRepository implements CompanyInterface
     }
 
     public function getUserDefaultCompanyId(){
-        return 1;
+        return $this->companyAssign->where('userId', Auth::id())->where('default', 1)->first()?->companyId;
     }
 
     public function getById($id){

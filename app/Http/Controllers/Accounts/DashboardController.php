@@ -1,19 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Accounts;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Accounts\Transaction\AccTransaction\AccTransactionInterface;
 use App\Repositories\Settings\Company\CompanyInterface;
+use Route;
 
-class HomeController extends Controller
-{   
-    private $accTransaction, $company;
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+class DashboardController extends Controller
+{
     public function __construct(
         AccTransactionInterface $accTransaction,         
         CompanyInterface $company
@@ -23,11 +19,6 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {   
         $defaultCompanyId = $this->company->getUserDefaultCompanyId();
