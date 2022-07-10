@@ -212,6 +212,7 @@ return [
         App\Repositories\HrPayroll\SystemInfo\Department\DepartmentRepoServiceProvider::class,
         App\Repositories\HrPayroll\SystemInfo\Section\SectionRepoServiceProvider::class,
         App\Repositories\HrPayroll\SystemInfo\Designation\DesignationRepoServiceProvider::class,
+        App\Repositories\HrPayroll\SystemInfo\Shift\ShiftRepoServiceProvider::class,
 
     ],
 

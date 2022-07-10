@@ -204,6 +204,10 @@
                 <a class="dropdown-item" href="{{ route('hrpayroll.designation.index') }}" >
                     Designation
                 </a>
+
+                <a class="dropdown-item" href="{{ route('hrpayroll.shift.index') }}" >
+                    Shift
+                </a>
             </div>
             
         </li>
