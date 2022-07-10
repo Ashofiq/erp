@@ -208,6 +208,10 @@ return [
         App\Repositories\Settings\User\UserRepoServiceProvider::class,
         App\Repositories\Customer\CustomerRepoServiceProvider::class,
 
+        // Hr payroll
+        App\Repositories\HrPayroll\SystemInfo\Department\DepartmentRepoServiceProvider::class,
+        App\Repositories\HrPayroll\SystemInfo\Section\SectionRepoServiceProvider::class,
+        App\Repositories\HrPayroll\SystemInfo\Designation\DesignationRepoServiceProvider::class,
 
     ],
 

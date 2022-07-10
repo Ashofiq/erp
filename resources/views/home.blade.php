@@ -25,6 +25,9 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js" type="text/javascript"></script> -->
     
+	<!-- datatable -->
+	<link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+	<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
   </head>
   <body  class=" layout-fluid">
@@ -38,6 +41,8 @@
             <a href=".">
               <img src="{{asset('public/static/logo.svg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
+
+			
           </h1>
           <div class="navbar-nav flex-row order-md-last">
             <div class="nav-item d-none d-md-flex me-3">
@@ -152,8 +157,8 @@
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                 <span class="avatar avatar-sm" style="background-image: url(./static/avatars/000m.jpg)"></span>
                 <div class="d-none d-xl-block ps-2">
-                  <div>Paweł Kuna</div>
-                  <div class="mt-1 small text-muted">UI Designer</div>
+                  <div>{{ auth()->user()->name }}</div>
+                  <!-- <div class="mt-1 small text-muted">UI Designer</div> -->
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -162,7 +167,6 @@
                 <a href="#" class="dropdown-item">Feedback</a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">Settings</a>
-                <!-- <a href="#" class="dropdown-item">Logout</a> -->
                 <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">

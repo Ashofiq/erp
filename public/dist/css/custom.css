@@ -5,3 +5,20 @@
 .chosen-container .chosen-single span{
   padding-top: 4px !important;
 }
+
+/* datatable */
+#DataTables_Table_0_filter{
+  display: none;
+}
+#DataTables_Table_0_length{
+  display: none;
+}
+#DataTables_Table_0_paginate>span>a{
+  background-color: 1px solid blue !important;
+
+}
+
+#DataTables_Table_0_paginate span .current{
+  background-color: 1px solid blue !important;
+}
+
