@@ -5,7 +5,7 @@ use App\Http\Controllers\HrPayroll\SystemInfo\DepartmentController;
 use App\Http\Controllers\HrPayroll\SystemInfo\SectionController;
 use App\Http\Controllers\HrPayroll\SystemInfo\DesignationController;
 use App\Http\Controllers\HrPayroll\SystemInfo\ShiftController;
-
+use App\Http\Controllers\HrPayroll\Employee\EmployeeController;
 
 Route::group([
     'prefix' => 'hrpayroll',
@@ -54,5 +54,16 @@ Route::group([
         Route::Post('/add', [ShiftController::class, 'create'])->name('hrpayroll.shift.create');
         Route::Post('/update', [ShiftController::class, 'update'])->name('hrpayroll.shift.update');
         Route::Post('/delete', [ShiftController::class, 'delete'])->name('hrpayroll.shift.delete');
+    });
+
+    // employee
+    Route::group([
+        'prefix' => 'employee',
+    ], function () {
+        Route::get('/index', [EmployeeController::class, 'index'])->name('hrpayroll.employee.index');
+        Route::Get('/add', [EmployeeController::class, 'add'])->name('hrpayroll.employee.add');
+        Route::Post('/add', [EmployeeController::class, 'create'])->name('hrpayroll.employee.create');
+        Route::Post('/update', [EmployeeController::class, 'update'])->name('hrpayroll.employee.update');
+        Route::Post('/delete', [EmployeeController::class, 'delete'])->name('hrpayroll.employee.delete');
     });
 });
