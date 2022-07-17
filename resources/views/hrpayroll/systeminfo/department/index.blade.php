@@ -229,7 +229,7 @@
 
   function edit(event) {
     var name = $(event.target).closest('tr').find("td a").text()
-    var description = $(event.target).closest('tr').find("td").eq(1).text()
+    var description = $(event.target).closest('tr').find("td").eq(2).text()
     var id = $(event.target).closest('tr').find("td a").attr('id')
     $('#editId').val(id);
     $("#name").val(name);
