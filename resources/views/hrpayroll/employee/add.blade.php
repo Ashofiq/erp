@@ -20,7 +20,7 @@
             <div class="row row-cards">
                 <div class="col-md-12">
                     @include('extras.__message')
-                    <form action="{{ route('hrpayroll.employee.create') }}" method="post" class="card">
+                    <form action="{{ route('hrpayroll.employee.save') }}" method="post" class="card">
                         @csrf
                         <div class="card">
                             <ul class="nav nav-tabs nav-fill" data-bs-toggle="tabs" role="tablist">
@@ -28,7 +28,7 @@
                                     <a href="#job-information" class="nav-link active" data-bs-toggle="tab"
                                         aria-selected="true" role="tab">Employee Job Information</a>
                                 </li>
-                                <li class="nav-item" role="presentation">
+                                {{-- <li class="nav-item" role="presentation">
                                     <a href="#personal-information" class="nav-link" data-bs-toggle="tab"
                                         aria-selected="false" role="tab" tabindex="-1"
                                         onclick="togleNavTab()">Employee Personal
@@ -47,7 +47,7 @@
                                 <li class="nav-item" role="presentation">
                                     <a href="#educational-information" class="nav-link" data-bs-toggle="tab" aria-selected="false"
                                         role="tab" tabindex="-1" onclick="togleNavTab()">Educational Qualification</a>
-                                </li>
+                                </li> --}}
                             </ul>
                             <div class="card-body">
                                 <div class="tab-content">
@@ -102,7 +102,7 @@
                                                 <div class="col-md-3">
                                                     <label class="form-label">Designation</label>
                                                     <select name="designationId" class="form-select chosen-select" required>
-                                                        <option value="">Select Designation</option>
+                                                        <option disabled selected>Select Designation</option>
                                                         @foreach ($designations as $desig)
                                                             <option
                                                                 {{ $desig->id == old('designationId') ? 'selected' : '' }}
@@ -127,7 +127,7 @@
 
 
                                     </div>
-                                    <div class="tab-pane" id="personal-information" role="tabpanel">
+                                    {{-- <div class="tab-pane" id="personal-information" role="tabpanel">
                                         <fieldset class="form-fieldset">
                                             <div class="mb-3">
                                                 <label class="form-label required">Father's Name</label>
@@ -406,7 +406,7 @@
                                             </div>
                                             
                                         </fieldset>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

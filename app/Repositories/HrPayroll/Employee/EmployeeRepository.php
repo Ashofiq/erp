@@ -21,18 +21,20 @@ class EmployeeRepository implements EmployeeInterface
         return $this->employee->get();
     }
     
-    // public function saveDepartment($data)
-    // {
-    //     $this->employee->name = $data->name;
-    //     $this->employee->description = $data->description;
-    //     $this->employee->lavel = $this->genLavel();
-    //     $this->employee->status = $this->employee::ACTIVE;
-    //     $employee = $this->employee->save();
-    //     if ($employee) {
-    //         return $this->employee;
-    //     }
-    //     return false;
-    // }
+    public function saveEmployee($data)
+    {
+        $this->employee->employeeId = $data->employeeId;
+        $this->employee->name = $data->name;
+        $this->employee->departmentId = $data->departmentId;
+        $this->employee->sectionId = $data->sectionId;
+        $this->employee->designationId = $data->designationId;
+        $this->employee->shiftId = $data->shiftId;
+        $employee = $this->employee->save();
+        if ($employee) {
+            return $this->employee;
+        }
+        return false;
+    }
 
     // public function updateDepartment($data){
     //     $department = $this->department->find($data->id);

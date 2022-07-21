@@ -48,12 +48,33 @@ class EmployeeController extends Controller
         return view('hrpayroll.employee.add', $data);
     }
 
-    public function create(Request $request)
+    public function save(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|unique:employees',
-        ]);
+        // dd($request);
+        // $validated = $request->validate([
+        //     'employId' => 'required|unique:employees',
+        //     'name' => 'required',
+        //     'departmentId' => 'required',
+        //     'sectionId' => 'required',
+        //     'designationId' => 'required',
+        //     'shiftId' => 'required',
 
-        return $request;
+        // ]);
+        $result = $this->employee->saveEmployee($request);
+        if($result){
+            return back()->with('message', 
+                $this->response(
+                    $this->SUCCESSCLASS(), 
+                    'Successfully Added'
+                )
+            );
+        }
+        
+        return back()->with('message', 
+                $this->response(
+                    $this->FAILURECLASS(), 
+                    $this->FAILMESSAGE()
+                )
+            );
     }
 }

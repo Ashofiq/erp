@@ -62,7 +62,7 @@ Route::group([
     ], function () {
         Route::get('/index', [EmployeeController::class, 'index'])->name('hrpayroll.employee.index');
         Route::Get('/add', [EmployeeController::class, 'add'])->name('hrpayroll.employee.add');
-        Route::Post('/add', [EmployeeController::class, 'create'])->name('hrpayroll.employee.create');
+        Route::Post('/add', [EmployeeController::class, 'save'])->name('hrpayroll.employee.save');
         Route::Post('/update', [EmployeeController::class, 'update'])->name('hrpayroll.employee.update');
         Route::Post('/delete', [EmployeeController::class, 'delete'])->name('hrpayroll.employee.delete');
     });
