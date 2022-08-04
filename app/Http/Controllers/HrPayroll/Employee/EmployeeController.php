@@ -16,6 +16,7 @@ class EmployeeController extends Controller
 {   
     use RespondsWithMessage;
     private $employee, $department, $designation;
+
     public function __construct(
         EmployeeInterface $employee,
         CompanyInterface $company,
@@ -49,11 +50,30 @@ class EmployeeController extends Controller
     }
 
     public function create(Request $request)
-    {
+    {   
         $validated = $request->validate([
-            'name' => 'required|unique:employees',
+            'employeeId' => 'required|unique:employees',
+            'name' => 'required',
         ]);
 
-        return $request;
+        try {
+            $final = $this->employee->saveEmployee($request);
+        } catch (\Excepyion $e) {
+            return back()->with('message', 
+                $this->response(
+                    $this->SUCCESSCLASS(), 
+                    $e->message()
+                )
+            );
+        }
+
+        return back()->with('message', 
+                $this->response(
+                    $this->SUCCESSCLASS(), 
+                    'Employee Added Successfully'
+                )
+            );
+
+        
     }
 }

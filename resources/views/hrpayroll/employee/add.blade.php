@@ -48,24 +48,50 @@
                                 <div class="tab-pane show active" id="job-information" role="tabpanel">
                                     
                                     <fieldset class="form-fieldset">
-                                        <div class="mb-3">
-                                            <label class="form-label required">Employee ID</label>
-                                            <input type="text" name="employeeId" class="form-control @error('employeeId') is-invalid @enderror" autocomplete="off"  placeholder="employee Id" required>
-                                            @error('employeeId')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="form-label required">Employee ID</label>
+                                                <input type="text" name="employeeId" value="{{ old('employeeId') }}" class="form-control @error('employeeId') is-invalid @enderror" autocomplete="off"  placeholder="employee Id" required>
+                                                @error('employeeId')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                       
+                                            <div class="col-md-3">
+                                                <label class="form-label required">Name</label>
+                                                <input type="text" value="{{ old('name') }}" name="name" class="form-control @error('name') is-invalid @enderror" autocomplete="off"  placeholder="employee name" required>
+                                                @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="form-label">Reporting To</label>
+                                                <select name="reportingTo" class="form-select chosen-select">
+                                                    <option disabled selected>--Select--</option>
+                                                    @foreach($employees as $employee)  
+                                                        <option {{ ($employee->id == old('reportingTo')) ? 'selected' : '' }} value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="form-label">Employee Type</label>
+                                                <select name="employeeType" class="form-select chosen-select">
+                                                    <option disabled selected>--Select--</option>
+                                                    @foreach($employees as $employee)  
+                                                        <option {{ ($employee->id == old('reportingTo')) ? 'selected' : '' }} value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
                                         </div>
-                                        <div class="mb-3">
-                                            <label class="form-label required">Name</label>
-                                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" autocomplete="off"  placeholder="name" required>
-                                            @error('name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                            
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <label class="form-label required">Department</label>
@@ -78,7 +104,7 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <label class="form-label required">Section</label>
-                                                <select name="sectionId " class="form-select chosen-select" required>
+                                                <select name="sectionId" class="form-select chosen-select" required>
                                                     <option disabled selected>Select Section</option>
                                                     @foreach($sections as $sec)  
                                                         <option {{ ($sec->id == old('sectionId ')) ? 'selected' : '' }} value="{{ $sec->id }}">{{ $sec->name }}</option>
@@ -105,6 +131,51 @@
                                                 </select>
                                             </div>
                                         </div>
+
+                                    
+
+                                        <div class="md-3">
+                                            <label class="form-label">Reporting To</label>
+                                            <select name="reportingTo" class="form-select chosen-select">
+                                                <option disabled selected>--Select--</option>
+                                                @foreach($employees as $employee)  
+                                                    <option {{ ($employee->id == old('reportingTo')) ? 'selected' : '' }} value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="md-3">
+                                            <label class="form-label">Employee Type</label>
+                                            <select name="employeeType" class="form-select chosen-select">
+                                                <option disabled selected>--Select--</option>
+                                                @foreach($employees as $employee)  
+                                                    <option {{ ($employee->id == old('reportingTo')) ? 'selected' : '' }} value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="md-3">
+                                            <label class="form-label">Joining Date</label>
+                                            <input type="date" name="joiningDate" value="{{ old('joiningDate') }}" class="form-control @error('joiningDate') is-invalid @enderror" autocomplete="off"  required>
+                                            @error('joiningDate')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="md-3">
+                                            <label class="form-label">Gross Salary</label>
+                                            <input type="text" name="grossSalary" value="{{ old('grossSalary') }}" class="form-control @error('grossSalary') is-invalid @enderror" autocomplete="off"  required>
+                                            @error('grossSalary')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+
+
+
                                        
                                     </fieldset>
 

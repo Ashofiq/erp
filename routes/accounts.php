@@ -70,7 +70,6 @@ Route::group([
     Route::any('contra-bank-to-cash', [ReportController::class, 'conBankToCash'])->name('accounts.contra.bank.to.cash');
     Route::any('balance-sheet', [ReportController::class, 'balanceSheet'])->name('accounts.balance.sheet');
     Route::any('test', [ReportController::class, 'test']);
-
 });
 
 // company
