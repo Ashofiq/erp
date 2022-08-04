@@ -286,4 +286,18 @@ class AccTransactionRepository implements AccTransactionInterface
         ->orderBy('date', 'ASC')
         ->get();
     }
+
+
+    public function getAsset($companyId, $fromDate, $toDate){
+        return $this->accTransaction
+        ->join("acc_transaction_details", "acc_transactions.id", "=", "accTransId", 'left outer')
+        ->join("chart_of_accounts as c", "c.id", "=", "chartOfAccId", 'left outer')
+        ->whereBetween('acc_transactions.date', [$fromDate, $toDate])
+        ->where('acc_transactions.companyId', $companyId)
+        ->where('c.parentId', 3)
+        // ->groupBy('p.accHead')
+        ->get();
+
+
+    }
 }

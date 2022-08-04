@@ -208,4 +208,25 @@ class ReportController extends Controller
         $data['companyId'] = $companyId;
         return view('Accounts.reports.contra_bank_to_cash', $data);
     }
+
+    public function balanceSheet(Request $request)
+    {
+        $data['companies'] = $this->company->userCompany();
+        $companyId = $request->companyId;
+        $fromDate = date('Y-m-d');
+        $toDate = date('Y-m-d');
+        $data['vouchers'] = [];
+
+        if (isset($request->fromDate)) {
+            $fromDate = Helper::dateBnToEn($request->fromDate);
+            $toDate = Helper::dateBnToEn($request->toDate);
+            $data['getAssets'] = $this->accTransaction->getAsset($companyId, $fromDate, $toDate);
+            return $data; 
+        }
+
+        $data['fromDate'] = $fromDate;
+        $data['toDate'] = $toDate;
+        $data['companyId'] = $companyId;
+        return view('Accounts.reports.balance_sheet', $data);
+    }
 }
