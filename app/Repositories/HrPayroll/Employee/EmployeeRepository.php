@@ -21,46 +21,31 @@ class EmployeeRepository implements EmployeeInterface
         return $this->employee->get();
     }
     
-    // public function saveDepartment($data)
-    // {
-    //     $this->employee->name = $data->name;
-    //     $this->employee->description = $data->description;
-    //     $this->employee->lavel = $this->genLavel();
-    //     $this->employee->status = $this->employee::ACTIVE;
-    //     $employee = $this->employee->save();
-    //     if ($employee) {
-    //         return $this->employee;
-    //     }
-    //     return false;
-    // }
+    public function saveEmployee($request){
 
-    // public function updateDepartment($data){
-    //     $department = $this->department->find($data->id);
+        $chectEmployee = $this->employee->where('employeeId', $request->employeeId)->first();
+        if ($chectEmployee != null) {
+            throw new Exception("employee Id is exist", 1);
+        }
 
-    //     $department->name = $data->name;
-    //     $department->description = $data->description;
-    //     if ($department->save()) {
-    //         return $department;
-    //     }
-    //     return false;
-    // }
-
-    // public function deleteDepartment($id)
-    // {   
-    //     $department = $this->department->find($id);
-    //     if ($department->delete()) {
-    //         return true;
-    //     }
-
-    //     return false;
-    // }
-    // public function genLavel()
-    // {
-    //     return $this->department->latest()->first()?->lavel + 1;
-    // }
-
-    // public function exist($id){
-    //     return false;
-    // }
+        $employee = new $this->employee;
+        $employee->name             = $request->name;
+        $employee->employeeId       = $request->employeeId;
+        $employee->departmentId     = $request->departmentId;
+        $employee->sectionId        = $request->sectionId;
+        $employee->designationId    = $request->designationId;
+        $employee->shiftId          = $request->shiftId;
+        $employee->headOfDepartment = $request->headOfDepartment;
+        $employee->reportingTo      = $request->reportingTo;
+        $employee->empType          = $request->empType;
+        $employee->pfMember         = $request->pfMember;
+        $employee->joiningDate      = $request->joiningDate;
+        $employee->jobLocation      = $request->jobLocation;
+        $employee->grossSalary      = $request->grossSalary;
+        if ($employee->save()) {
+            return $employee;
+        }
+        return false;
+    }
 
 }

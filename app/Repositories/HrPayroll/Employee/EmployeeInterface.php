@@ -6,12 +6,7 @@ interface EmployeeInterface {
 
     public function getAll();
 
-    // public function saveDepartment($data);
+    public function saveEmployee($data);
 
-    // public function updateDepartment($data);
-
-    // public function deleteDepartment($id);
-
-    // public function exist($id);
     
 }

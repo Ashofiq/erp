@@ -7,7 +7,7 @@ use App\Http\Controllers\Accounts\DashboardController;
 use App\Http\Controllers\Settings\Company\ConpanyController;
 use App\Http\Controllers\Settings\User\UserController;
 use App\Http\Controllers\Settings\Company\CompanyAssignController;
-
+ 
 Route::group([
     'prefix' => 'account',
     'middleware' => ['UserGuard'],
@@ -68,7 +68,8 @@ Route::group([
     Route::any('trial-balance', [ReportController::class, 'trialBalance'])->name('accounts.trial.balance');
     Route::any('liquid-cash', [ReportController::class, 'liquidCash'])->name('accounts.liquid.cash');
     Route::any('contra-bank-to-cash', [ReportController::class, 'conBankToCash'])->name('accounts.contra.bank.to.cash');
-
+    Route::any('balance-sheet', [ReportController::class, 'balanceSheet'])->name('accounts.balance.sheet');
+    Route::any('test', [ReportController::class, 'test']);
 });
 
 // company

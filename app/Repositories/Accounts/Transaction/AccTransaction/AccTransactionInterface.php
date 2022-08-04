@@ -41,4 +41,6 @@ interface AccTransactionInterface {
     public function getTrialBalance($companyId, $fromDate, $toDate);
 
     public function getLiquidCash($companyId, $fromDate, $toDate);
+
+    public function getAsset($companyId, $fromDate, $toDate);
 }

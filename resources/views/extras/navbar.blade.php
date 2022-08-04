@@ -163,6 +163,10 @@
                     <a  href="{{ route('accounts.contra.bank.to.cash') }}" class="dropdown-item">
                         Bank To Cash
                     </a>
+
+                    <a  href="{{ route('accounts.balance.sheet') }}" class="dropdown-item">
+                        Balance Sheet
+                    </a>
             </div>
         </li>
        
