@@ -12,6 +12,7 @@ Route::group([
     'middleware' => ['UserGuard'],
     'namespace' => 'App\Http\Controllers'
 ], function () {
+
     Route::get('/', function(){
         return "dashboard";
     })->name('hrpayroll.dashboard');
@@ -65,5 +66,9 @@ Route::group([
         Route::Post('/add', [EmployeeController::class, 'create'])->name('hrpayroll.employee.create');
         Route::Post('/update', [EmployeeController::class, 'update'])->name('hrpayroll.employee.update');
         Route::Post('/delete', [EmployeeController::class, 'delete'])->name('hrpayroll.employee.delete');
+
+        
+
     });
+
 });

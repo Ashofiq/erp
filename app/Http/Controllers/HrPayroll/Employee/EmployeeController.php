@@ -11,6 +11,7 @@ use App\Repositories\HrPayroll\SystemInfo\Department\DepartmentInterface;
 use App\Repositories\HrPayroll\SystemInfo\Designation\DesignationInterface;
 use App\Repositories\HrPayroll\SystemInfo\Section\SectionInterface;
 use App\Repositories\HrPayroll\SystemInfo\Shift\ShiftInterface;
+use App\Enum\Hrpayroll\PaymentType;
 
 class EmployeeController extends Controller
 {   
@@ -36,6 +37,7 @@ class EmployeeController extends Controller
     public function index()
     {   
         $data['employees'] = $this->employee->getAll();
+        $data['paymentType'] = PaymentType::enum();
         return view('hrpayroll.employee.index', $data);
     }
 
@@ -59,12 +61,14 @@ class EmployeeController extends Controller
         try {
             $final = $this->employee->saveEmployee($request);
         } catch (\Excepyion $e) {
+
             return back()->with('message', 
                 $this->response(
                     $this->SUCCESSCLASS(), 
                     $e->message()
                 )
             );
+            
         }
 
         return back()->with('message', 
