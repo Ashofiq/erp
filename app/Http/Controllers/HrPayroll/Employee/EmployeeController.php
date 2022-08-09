@@ -37,7 +37,6 @@ class EmployeeController extends Controller
     public function index()
     {   
         $data['employees'] = $this->employee->getAll();
-        $data['paymentType'] = PaymentType::enum();
         return view('hrpayroll.employee.index', $data);
     }
 
@@ -48,6 +47,7 @@ class EmployeeController extends Controller
         $data['designations'] = $this->designation->getAll();
         $data['sections'] = $this->section->getAll();
         $data['shifts'] = $this->shift->getAll();
+        $data['paymentType'] = PaymentType::enum();
         return view('hrpayroll.employee.add', $data);
     }
 
@@ -72,11 +72,11 @@ class EmployeeController extends Controller
         }
 
         return back()->with('message', 
-                $this->response(
-                    $this->SUCCESSCLASS(), 
-                    'Employee Added Successfully'
-                )
-            );
+            $this->response(
+                $this->SUCCESSCLASS(), 
+                'Employee Added Successfully'
+            )
+        );
 
         
     }
