@@ -20,7 +20,8 @@ class LeaveTypeController extends Controller
 
     public function index()
     {
-        # code...
+        $data['leaveTypes'] = $this->leaveType->allLeaveType();
+        return view('hrpayroll.leave.leaveType.index', $data); 
     }
 
     public function add()
@@ -51,6 +52,63 @@ class LeaveTypeController extends Controller
                 )
             );
             
+    }
+
+
+    public function edit($id)
+    {
+        $data['leaveType'] = $this->leaveType->getById($id);
+        return view('hrpayroll.leave.leaveType.edit', $data);
+    }
+
+    public function update($id, Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|unique:leave_types,name,'.$id
+        ]);
+
+        $final = $this->leaveType->updateType($request, $id);
+        
+        if ($final) {
+            return back()->with('message',
+                $this->response(
+                    $this->SUCCESSCLASS(),
+                    'Leave type update successfully'
+                )
+            );
+        }
+
+        return back()->with('message', 
+                $this->response(
+                    $this->FAILURECLASS(), 
+                    $this->FAILMESSAGE()
+                )
+            );
+    }
+
+    public function deleteType(Request $request)
+    {
+        
+        $message = '';
+        // try {
+        //     $this->leaveType->deleteType($request->id);
+        // } catch (\Throwable $e) {
+        //     // $message = $e->getMessage();
+        //     // return $e->getMessage();
+        //     return back()->with('message',
+        //         $this->response(
+        //             $this->SUCCESSCLASS(),
+        //             $e->getMessage()
+        //         )
+        //     );
+            
+        // }
+
+        return back()->with('message', 'delete');
+
+       
+        
+        
     }
 
 }

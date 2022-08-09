@@ -77,8 +77,9 @@ Route::group([
         Route::get('/index', [LeaveTypeController::class, 'index'])->name('hrpayroll.leaveType.index');
         Route::Get('/add', [LeaveTypeController::class, 'add'])->name('hrpayroll.leaveType.add');
         Route::Post('/add', [LeaveTypeController::class, 'create'])->name('hrpayroll.leaveType.create');
-        Route::Post('/update', [LeaveTypeController::class, 'update'])->name('hrpayroll.leaveType.update');
-        Route::Post('/delete', [LeaveTypeController::class, 'delete'])->name('hrpayroll.leaveType.delete');
+        Route::Get('/edit/{id}', [LeaveTypeController::class, 'edit'])->name('hrpayroll.leaveType.edit');
+        Route::Post('/update/{id}', [LeaveTypeController::class, 'update'])->name('hrpayroll.leaveType.update');
+        Route::Post('/delete', [LeaveTypeController::class, 'deleteType'])->name('hrpayroll.leaveType.delete');
     });
 
     // leave

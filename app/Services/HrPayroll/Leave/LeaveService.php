@@ -12,6 +12,7 @@ class LeaveService {
     public function __construct(Leave $leave, LeaveType $leaveType)
     {
         $this->leave = $leave;
+        $this->leaveType = $leaveType;
     }
 
     // Leave Type ...........................................
@@ -24,6 +25,42 @@ class LeaveService {
         $type->save();
 
         if ($type->save()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function allLeaveType()
+    {
+        return $this->leaveType->get();
+    }
+
+    public function getById($id)
+    {
+        return $this->leaveType->find($id);
+    }
+
+    public function updateType($request, $id)
+    {
+        
+        $type = $this->leaveType->find($id);
+        $type->name = $request->name;
+        $type->status = 1;
+        if ($type->save()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function deleteType($id)
+    {   
+        $type = $this->leave->where('leaveTypeId', $id)->first();
+        if ($type == null) {
+            throw new \Exception("Cannot Delete this type, already Exist");
+        }
+
+        if ($this->leaveType->find($id)->delete()) {
             return true;
         }
 

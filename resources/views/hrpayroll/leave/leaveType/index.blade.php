@@ -1,5 +1,5 @@
 @extends('home')
-@section('title', 'Company Information')
+@section('title', 'Leave Type Information')
 
 @section('content')
     <div class="container-xl">
@@ -63,16 +63,28 @@
                   </thead>
                   <tbody>
                     <tr>
-                      @foreach($companies as $key =>  $row)
+                      @foreach($leaveTypes as $key =>  $row)
                       <td>{{ $key + 1 }}</td>
                       <td><span class="">{{ $row->name }}</span></td>
+                      <td>{{ $row->status == 1 ? 'Active' : 'Inactive' }}</td>
                       <td class="text-end">
-                        <a href="#" class="btn btn-red">
-                          Red
-                        </a>
-                        <a title="edit" href="#" class="btn btn-flickr btn-icon" aria-label="Flickr">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
-                        </a>
+
+                        <ul class="list-group list-group-horizontal">
+                          <li>
+                            <form id="deleteChart_{{ $row->id }}" method="post" action="{{ route('hrpayroll.leaveType.delete') }}">
+                              @csrf
+                              <input type="hidden" value="{{ $row->id }}" name="id">
+                              <input id="{{ $row->id }}" onclick="deleteChart(this.id)" type="button" value="Del" class="btn btn-sm btn-red">
+                            </form>
+                          </li>
+                          <li>
+                            <a  class="edit-modal-button" title="edit" href="{{ route('hrpayroll.leaveType.edit', $row->id) }}" class="btn btn-sm btn-flickr btn-icon" aria-label="Flickr">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+                            </a>
+                          </li>
+                        </ul>
+                        
+                      
                       </td>
                     </tr>
                     @endforeach
@@ -82,7 +94,7 @@
               </div>
               <div class="card-footer d-flex align-items-center">
                 <ul class="pagination m-0 ms-auto">
-                  {{ $companies->links('pagination::bootstrap-4') }}
+                  <!-- footer -->
                 </ul>
               </div>
             </div>
@@ -90,5 +102,23 @@
         </div>
       </div>
     </div>
+
+    <script>
+      function deleteChart(id) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $('#deleteChart_'+id).submit()
+          }
+        })
+      }
+    </script>
               
 @endsection
