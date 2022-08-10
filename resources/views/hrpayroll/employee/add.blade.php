@@ -84,8 +84,8 @@
                                                 <label class="form-label">Employee Type</label>
                                                 <select name="employeeType" class="form-select chosen-select">
                                                     <option disabled selected>--Select--</option>
-                                                    @foreach($employees as $employee)  
-                                                        <option {{ ($employee->id == old('reportingTo')) ? 'selected' : '' }} value="{{ $employee->id }}">{{ $employee->name }}</option>
+                                                    @foreach($paymentType as $key => $type)  
+                                                        <option {{ ($type == old('employeeType')) ? 'selected' : '' }} value="{{ $type }}">{{ $key }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

@@ -6,12 +6,15 @@ use App\Http\Controllers\HrPayroll\SystemInfo\SectionController;
 use App\Http\Controllers\HrPayroll\SystemInfo\DesignationController;
 use App\Http\Controllers\HrPayroll\SystemInfo\ShiftController;
 use App\Http\Controllers\HrPayroll\Employee\EmployeeController;
+use App\Http\Controllers\HrPayroll\Leave\LeaveController;
+use App\Http\Controllers\HrPayroll\Leave\LeaveTypeController;
 
 Route::group([
     'prefix' => 'hrpayroll',
     'middleware' => ['UserGuard'],
     'namespace' => 'App\Http\Controllers'
 ], function () {
+
     Route::get('/', function(){
         return "dashboard";
     })->name('hrpayroll.dashboard');
@@ -66,4 +69,27 @@ Route::group([
         Route::Post('/update', [EmployeeController::class, 'update'])->name('hrpayroll.employee.update');
         Route::Post('/delete', [EmployeeController::class, 'delete'])->name('hrpayroll.employee.delete');
     });
+
+    // leave Type
+    Route::group([
+        'prefix' => 'leaveType',
+    ], function () {
+        Route::get('/index', [LeaveTypeController::class, 'index'])->name('hrpayroll.leaveType.index');
+        Route::Get('/add', [LeaveTypeController::class, 'add'])->name('hrpayroll.leaveType.add');
+        Route::Post('/add', [LeaveTypeController::class, 'create'])->name('hrpayroll.leaveType.create');
+        Route::Post('/update', [LeaveTypeController::class, 'update'])->name('hrpayroll.leaveType.update');
+        Route::Post('/delete', [LeaveTypeController::class, 'delete'])->name('hrpayroll.leaveType.delete');
+    });
+
+    // leave
+    Route::group([
+        'prefix' => 'leave',
+    ], function () {
+        Route::get('/index', [LeaveController::class, 'index'])->name('hrpayroll.leave.index');
+        Route::Get('/add', [LeaveController::class, 'add'])->name('hrpayroll.leave.add');
+        Route::Post('/add', [LeaveController::class, 'create'])->name('hrpayroll.leave.create');
+        Route::Post('/update', [LeaveController::class, 'update'])->name('hrpayroll.leave.update');
+        Route::Post('/delete', [LeaveController::class, 'delete'])->name('hrpayroll.leave.delete');
+    });
+
 });
