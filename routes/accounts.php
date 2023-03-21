@@ -25,7 +25,6 @@ Route::group([
     Route::get('add', [FinancialYearController::class, 'add'])->name('accounts.fiscal.year.add');
     Route::Post('add', [FinancialYearController::class, 'save'])->name('accounts.fiscal.year.save');
     Route::get('index', [FinancialYearController::class, 'index'])->name('accounts.fiscal.year.all');
-
 });
 
 // chart of account

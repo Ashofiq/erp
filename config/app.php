@@ -198,6 +198,11 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+        // mejbah uddin 01552-306865
+        // purato building 103, 
+        // khondokar dil uzzamn, 
+        // Mannan kazi 01736-630596
+        // dhanmondi road: 3/A, house : 42
 
         // repositories
         App\Repositories\Settings\Company\CompanyRepoServiceProvider::class,
